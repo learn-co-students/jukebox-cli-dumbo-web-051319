@@ -14,11 +14,6 @@
 
 def help
   #this method should be the same as in jukebox.rb
-puts  "I accept the following commands: \n
-- help : displays this help message \n
-- list : displays a list of songs you can play \n 
-- play : lets you choose a song to play \n
-- exit : exits this program"
 
 end
 
