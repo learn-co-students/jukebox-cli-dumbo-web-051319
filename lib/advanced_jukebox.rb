@@ -40,7 +40,16 @@ def play(my_songs)
   #if it isn't, tell them their choice is invalid
   #if it is, play the song using the system 'open <file path>' syntax
   #get the file path of the song by looking it up in the my_songs hash
+  puts "Please enter a song name or number:"
+  #The #chomp method removes any new lines at the end of a string
+  song_name = gets.chomp
+  my_songs.each_key do |song|
+    if song_name == song.downcase
+      system "open" + my_songs[song]
+      break
+    end
 
+  end
 end
 
 def exit_jukebox
