@@ -13,14 +13,12 @@
 # }
 
 def help
-  #this method should be the same as in jukebox.rb
   puts "I accept the following commands:"
   puts  "- help : displays this help message"
   puts  "- list : displays a list of songs you can play"
   puts  "- play : lets you choose a song to play"
   puts  "- exit : exits this program"
 end
-
 
 def list(my_songs)
   #this method is different! Collect the keys of the my_songs hash and
@@ -40,22 +38,47 @@ def play(my_songs)
   #if it isn't, tell them their choice is invalid
   #if it is, play the song using the system 'open <file path>' syntax
   #get the file path of the song by looking it up in the my_songs hash
-  puts "Please enter a song name or number:"
-  #The #chomp method removes any new lines at the end of a string
-  song_name = gets.chomp
-  my_songs.each_key do |song|
-    if song_name == song.downcase
-      system "open" + my_songs[song]
+  puts "Please enter a song name or number"
+  input = gets.chomp
+  my_songs.each_with_index do |song, index|
+    if input.to_i == (index+1) || input == song
+      puts "Playing #{song}"
+      break
+    else
+      puts "Invalid input, please try again"
       break
     end
 
-  end
+   end
 end
+#play(my_songs)
 
 def exit_jukebox
   #this method is the same as in jukebox.rb
+  puts "Goodbye"
 end
 
 def run(my_songs)
   #this method is the same as in jukebox.rb
+  help
+  input = " "
+
+  while input != 'exit'
+    puts "Please enter a command:"
+    input = gets.strip                      #the #strip method removes whitespace (leading and trailing) and new lines.
+    case input
+    when 'help'
+      help
+    when 'list'
+      list(my_songs)
+    when 'play'
+      play(my_songs)
+    when 'exit'
+      exit_jukebox
+    else
+      puts "Invalid input."
+    end
+  end
+
+#exit_jukebox
 end
