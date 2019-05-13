@@ -22,12 +22,27 @@ HELP
   puts help
 end
 
-def play()
+def list(songs)
+  #hint from instructions: use .each_with_index - https://apidock.com/ruby/Enumerator/each_with_index |value, index|
+  #hint from instructions: arrays are indexed starting at 0 so adding 1 to the index number is needed
+  
+  songs.each_with_index do |song, i|
+    puts "#{i+1}. #{song}"
+  end
+end 
+
+
+def play(songs)
+  
+  puts "Please enter a song name or number:"
+  song = gets.chomp
+  
+  puts "Playing <song name>"
+  puts "Invalid input, please try again"
   
 end
 
-def list()
-end
+
 
 def exit_jukebox()
 end
