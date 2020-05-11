@@ -11,30 +11,26 @@ songs = [
 ]
 
 def help
-  help = <<-HELP
-I accept the following commands:
-- help : displays this help message
-- list : displays a list of songs you can play
-- play : lets you choose a song to play
-- exit : exits this program
-HELP
-
-  puts help
+  puts  "I accept the following commands:"
+  puts  "- help : displays this help message"
+  puts  "- list : displays a list of songs you can play"
+  puts  "- play : lets you choose a song to play"
+  puts  "- exit : exits this program"
 end
 
 def list(songs)
   #hint from instructions: use .each_with_index - https://apidock.com/ruby/Enumerator/each_with_index |value, index|
   #hint from instructions: arrays are indexed starting at 0 so adding 1 to the index number is needed
   
-  songs.each_with_index do |song, i|
+songs.each_with_index do |song, i|
     puts "#{i+1}. #{song}"
   end
-end 
+end
 
 
 def play(songs)
   puts "Please enter a song name or number:"
-  song = gets.chomp
+  song_to_play = gets.chomp
   if (1..9).to_a.include?(song_to_play.to_i)
     puts "Playing #{songs[song_to_play.to_i - 1]}"
   elsif songs.include?(song_to_play)
@@ -45,8 +41,27 @@ def play(songs)
 end
 
 
-
-def exit_jukebox()
+def exit_jukebox
+  puts "Goodbye"
 end
+
+def run(songs)
+  input = ""
+  while input
+  puts "Please enter a command:"
+  case input 
+  when 'list'
+    list(songs)
+  when 'play'
+    list(songs)
+    play(songs)
+  when 'help'
+    help
+  when 'exit'
+    exit_jukebox
+  end
+end
+end
+
 
 
