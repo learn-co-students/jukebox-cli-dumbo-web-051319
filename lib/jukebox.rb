@@ -20,27 +20,28 @@ def help
   puts  "- exit : exits this program"
 end
 
-def list(my_songs)
-  i=1
-  my_songs.each_with_index do |song|
-    puts "#{i}. #{song}"
+def list(songs)
+  songs.each_with_index do |song, index|
+    puts "#{index+1}. #{song}"
   end
 end
 
 
-def play(my_songs)
+def play(songs)
   puts "Please enter a song name or number"
-  input = gets.chomp
-  my_songs.each_with_index do |song, index|
-    if input.to_i == (index+1) || input == song
-      puts "Playing #{song}"
-      break
-    else
-      puts "Invalid input, please try again"
-      break
+  user_song = gets.chomp
+  juke_answer = ""
+  songs.each_with_index do |song, index|
+    if user_song == (index + 1).to_s || user_song == song
+      juke_answer = "Playing #{song}"
     end
-
-   end
+  end
+    if juke_answer.include?("Playing")
+      puts juke_answer
+    else
+      puts "Invalid input, try again"
+      play(songs)
+    end
 end
 
 
@@ -48,7 +49,7 @@ def exit_jukebox
   puts "Goodbye"
 end
 
-def run(my_songs)
+def run(songs)
   help
   input = " "
 
@@ -59,15 +60,13 @@ def run(my_songs)
     when 'help'
       help
     when 'list'
-      list(my_songs)
+      list(songs)
     when 'play'
-      play(my_songs)
+      play(songs)
     when 'exit'
       exit_jukebox
     else
       puts "Invalid input."
     end
   end
-
-#exit_jukebox
 end
