@@ -1,3 +1,5 @@
+# Help from Tanuka Das
+
 songs = [
   "Phoenix - 1901",
   "Tokyo Police Club - Wait Up",
@@ -11,33 +13,34 @@ songs = [
 ]
 
 def help
-  puts  "I accept the following commands:"
+  puts "I accept the following commands:"
   puts  "- help : displays this help message"
   puts  "- list : displays a list of songs you can play"
   puts  "- play : lets you choose a song to play"
   puts  "- exit : exits this program"
 end
 
-def list(songs)
-  #hint from instructions: use .each_with_index - https://apidock.com/ruby/Enumerator/each_with_index |value, index|
-  #hint from instructions: arrays are indexed starting at 0 so adding 1 to the index number is needed
-  
-songs.each_with_index do |song, i|
-    puts "#{i+1}. #{song}"
+def list(my_songs)
+  i=1
+  my_songs.each_with_index do |song|
+    puts "#{i}. #{song}"
   end
 end
 
 
-def play(songs)
-  puts "Please enter a song name or number:"
-  song_to_play = gets.chomp
-  if (1..9).to_a.include?(song_to_play.to_i)
-    puts "Playing #{songs[song_to_play.to_i - 1]}"
-  elsif songs.include?(song_to_play)
-    puts "Playing #{song_to_play}"
-  else
-    puts "Invalid input, please try again"
-  end
+def play(my_songs)
+  puts "Please enter a song name or number"
+  input = gets.chomp
+  my_songs.each_with_index do |song, index|
+    if input.to_i == (index+1) || input == song
+      puts "Playing #{song}"
+      break
+    else
+      puts "Invalid input, please try again"
+      break
+    end
+
+   end
 end
 
 
@@ -45,23 +48,26 @@ def exit_jukebox
   puts "Goodbye"
 end
 
-def run(songs)
-  input = ""
-  while input
-  puts "Please enter a command:"
-  case input 
-  when 'list'
-    list(songs)
-  when 'play'
-    list(songs)
-    play(songs)
-  when 'help'
-    help
-  when 'exit'
-    exit_jukebox
+def run(my_songs)
+  help
+  input = " "
+
+  while input != 'exit'
+    puts "Please enter a command:"
+    input = gets.strip       
+    case input
+    when 'help'
+      help
+    when 'list'
+      list(my_songs)
+    when 'play'
+      play(my_songs)
+    when 'exit'
+      exit_jukebox
+    else
+      puts "Invalid input."
+    end
   end
+
+#exit_jukebox
 end
-end
-
-
-
