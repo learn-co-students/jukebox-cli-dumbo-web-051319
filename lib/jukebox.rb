@@ -1,4 +1,4 @@
-# Help from Tanuka Das
+# Help from Tanuka Das and Tess Neau
 
 songs = [
   "Phoenix - 1901",
